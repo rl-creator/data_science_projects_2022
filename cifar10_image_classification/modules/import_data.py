@@ -1,5 +1,6 @@
 
-'''Module containing function to import dataset.'''
+'''Module containing functions to import dataset and prepare independent and 
+response variables.'''
 
 import tensorflow as tf
 from tensorflow.keras.datasets import cifar10
@@ -13,4 +14,5 @@ def get_train_test_data (data):
     (X_train, y_train), (X_test, y_test) = data
     return X_train, y_train, X_test, y_test
 
-#if __name__ == "__main__":
+if __name__ == "__main__":
+    pass
