@@ -15,5 +15,19 @@ def get_train_test_data (data):
     (X_train, y_train), (X_test, y_test) = data
     return store_data ('X_train', 'y_train', 'X_test', 'y_test') (X_train, y_train, X_test, y_test)
 
+def normalise_data (train_test_data):
+    '''Normalise data to a 0 to 1 scale.
+
+    The RBG colour scale for photos measures red, blue, and green on a 0 to 255 
+    point scale. Dividing by 255 coverts all RBG measurements to a 0 to 1 scale.
+    '''
+    data_normalised = tuple (arr.astype (float) /255 for arr in train_test_data)
+
+    train_test_data_norm = store_data ('X_train_norm', 'y_train_norm', 'X_test_norm', 'y_test_norm') (*data_normalised)
+    
+    return store_data ('data_raw', 'data_normalised') (train_test_data, train_test_data_norm)
+
+
+
 if __name__ == "__main__":
     pass
