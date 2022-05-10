@@ -6,8 +6,15 @@ import tensorflow as tf
 from tensorflow.keras.datasets import cifar10
 from storage import store_data
 
-def get_data ():
-    '''Import included cifar10 dataset in the tensorflow kears library.'''
+def get_data (n):
+    '''Import included cifar10 dataset in the tensorflow kears library.
+    
+    n: Argument serves no purpose. It is needed because the 'create_pipeline'
+    function requires an 'input' argument. However, if 'get_data' does not have 
+    an argument, there will be an error where 'get_data' will have issue with an
+    argument being fed to it from the pipeline. So, to resolve the conflict, 
+    'get_data' has an argument that does not have a purpose for the function.
+    '''
     return cifar10.load_data ()
 
 def get_train_test_data (data):
