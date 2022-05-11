@@ -1,9 +1,10 @@
 
-'''Module containing function for creating functional pipeline.'''
+'''Module containing functions for creating functional pipeline.'''
 
-def create_pipeline (list_of_functions : list):
+
+def create_pipeline (*list_of_functions):
     '''Input a list of functions to be converted to a functional pipeline.'''
-    def pipeline (input = None):
+    def apply_pipeline (input):
         '''Input for the pipeline function.
         
         Input is whatever initiates the pipeline. For example: the input layer 
@@ -23,4 +24,7 @@ def create_pipeline (list_of_functions : list):
             res = function (res)
 
         return res
-    return pipeline
+    return apply_pipeline
+
+if __name__ == "__main__":
+    pass
