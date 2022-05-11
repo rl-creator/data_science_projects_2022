@@ -3,7 +3,6 @@
 response variables.'''
 
 import tensorflow as tf
-from tensorflow.keras.datasets import cifar10
 from storage import store_data
 
 def get_data (dataset):
