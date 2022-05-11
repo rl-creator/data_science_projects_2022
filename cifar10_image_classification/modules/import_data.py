@@ -6,16 +6,14 @@ import tensorflow as tf
 from tensorflow.keras.datasets import cifar10
 from storage import store_data
 
-def get_data (n):
-    '''Import included cifar10 dataset in the tensorflow kears library.
+def get_data (dataset):
+    '''Load dataset desired for analysis.
     
-    n: Argument serves no purpose. It is needed because the 'create_pipeline'
-    function requires an 'input' argument. However, if 'get_data' does not have 
-    an argument, there will be an error where 'get_data' will have issue with an
-    argument being fed to it from the pipeline. So, to resolve the conflict, 
-    'get_data' has an argument that does not have a purpose for the function.
+    dataset: The dataset to be loaded. 
+
+    The dataset needs to be a dataset from the keras.datasets library.
     '''
-    return cifar10.load_data ()
+    return dataset.load_data ()
 
 def get_train_test_data (data):
     '''Unpack data into X and y training and test sets.'''
