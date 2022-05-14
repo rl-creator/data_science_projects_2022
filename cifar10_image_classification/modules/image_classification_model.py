@@ -43,6 +43,38 @@ def create_model (input_layer, hidden_layers):
     return pass_through_data
 
 
+###   Compile model
+
+def compile_model (optimizer = "Adam", loss = "catagorical_crossentropy", metrics = ["accuracy"]):
+    '''Function to set optimizer, loss function, and metrics for the model and 
+    compile the model.
+    '''
+    def input_model_n_pass_data (data_model):
+        '''Input the model to be compiled.
+        Input data to be passed through the pipeline.
+        
+        The data is not being used in this function. 
+        This function will only compile the model. Once the model is compiled,
+        the compiled model and the data will be passed to the next function for
+        training.
+        '''
+
+        model = data_model.model
+
+        model.compile (optimizer = optimizer, 
+                       loss = loss, 
+                       metrics = metrics)
+        
+        ########
+        #   Data
+        data_raw = data_model.data_raw
+        data_normalised = data_model.data_normalised
+        ########
+
+        return store_data ("data_raw", "data_normalised", "model") (data_raw, data_normalised, model)
+        
+    return input_model_n_pass_data
+
 
 if __name__ == "__main__":
     pass
