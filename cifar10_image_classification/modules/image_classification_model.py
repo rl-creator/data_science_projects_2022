@@ -76,5 +76,40 @@ def compile_model (optimizer = "Adam", loss = "catagorical_crossentropy", metric
     return input_model_n_pass_data
 
 
+def compile_model2 (optimizer = "Adam", loss = "catagorical_crossentropy", metrics = ["accuracy"]):
+    '''Function to set optimizer, loss function, and metrics for the model and 
+    compile the model.
+    '''
+    def input_model_n_pass_data (data_model):
+        '''Input the model to be compiled.
+        Input data to be passed through the pipeline.
+        
+        The data is not being used in this function. 
+        This function will only compile the model. Once the model is compiled,
+        the compiled model and the data will be passed to the next function for
+        training.
+
+
+        ###############################
+        This way of calling the model and compiling works.
+        It is not necessary to assign data_model.model to a new variable.
+        Possible explanation: model is an instance of keras.Model which is a 
+        mutable object. So, by calling the object and running the compile 
+        method, the object is being altered in the tuple 'data_model,' and after,
+        when returned, the tuple 'data_model,' with the changed 'model' is 
+        returned.
+        ###############################
+        '''
+
+        data_model.model.compile (optimizer = optimizer, 
+                                  loss = loss, 
+                                  metrics = metrics)
+        
+        print ("Model compiled for compile_model2")
+
+        return data_model
+        
+    return input_model_n_pass_data
+
 if __name__ == "__main__":
     pass
