@@ -111,5 +111,26 @@ def compile_model2 (optimizer = "Adam", loss = "catagorical_crossentropy", metri
         
     return input_model_n_pass_data
 
+
+###   Train model
+
+def train_model (batch_size = None, validation_split = 0.0, **model_param):
+    '''Function to set the parameters of the model fitting.'''
+    def input_model_n_data (data_model):
+        '''Function to train the model'''
+
+        #   Training data
+        X_train, y_train = data_model.data_normalised.X_train_norm, data_model.data_normalised.y_train
+
+        data_model.model.fit (X_train, y_train, 
+                              batch_size = batch_size,
+                              validation_split = validation_split)
+        
+        print ("Completed model training.")
+
+        return data_model
+
+    return input_model_n_data
+
 if __name__ == "__main__":
     pass
