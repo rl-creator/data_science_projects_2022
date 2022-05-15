@@ -45,10 +45,8 @@ def create_model (input_layer, hidden_layers):
 
 ###   Compile model
 
-def compile_model (optimizer = "Adam", loss = "catagorical_crossentropy", metrics = ["accuracy"]):
-    '''Function to set optimizer, loss function, and metrics for the model and 
-    compile the model.
-    '''
+def compile_model (**parameters_for_compiling_model):
+    '''Function to set parameters for the model and compile the model.'''
     def input_model_n_pass_data (data_model):
         '''Input the model to be compiled.
         Input data to be passed through the pipeline.
@@ -61,10 +59,9 @@ def compile_model (optimizer = "Adam", loss = "catagorical_crossentropy", metric
 
         model = data_model.model
 
-        model.compile (optimizer = optimizer, 
-                       loss = loss, 
-                       metrics = metrics)
+        model.compile (**parameters_for_compiling_model)
         
+        print ("Model compiled for compile_model")
         ########
         #   Data
         data_raw = data_model.data_raw
@@ -76,10 +73,8 @@ def compile_model (optimizer = "Adam", loss = "catagorical_crossentropy", metric
     return input_model_n_pass_data
 
 
-def compile_model2 (optimizer = "Adam", loss = "catagorical_crossentropy", metrics = ["accuracy"]):
-    '''Function to set optimizer, loss function, and metrics for the model and 
-    compile the model.
-    '''
+def compile_model2 (**parameters_for_compiling_model):
+    '''Function to set parameters for the model and compile the model.'''
     def input_model_n_pass_data (data_model):
         '''Input the model to be compiled.
         Input data to be passed through the pipeline.
@@ -101,9 +96,7 @@ def compile_model2 (optimizer = "Adam", loss = "catagorical_crossentropy", metri
         ###############################
         '''
 
-        data_model.model.compile (optimizer = optimizer, 
-                                  loss = loss, 
-                                  metrics = metrics)
+        data_model.model.compile (**parameters_for_compiling_model)
         
         print ("Model compiled for compile_model2")
 
@@ -114,17 +107,17 @@ def compile_model2 (optimizer = "Adam", loss = "catagorical_crossentropy", metri
 
 ###   Train model
 
-def train_model (batch_size = None, validation_split = 0.0, **model_param):
+def train_model (**parameters_for_model_training):
     '''Function to set the parameters of the model fitting.'''
     def input_model_n_data (data_model):
         '''Function to train the model'''
 
+        print ("Start model training.")
+
         #   Training data
         X_train, y_train = data_model.data_normalised.X_train_norm, data_model.data_normalised.y_train
 
-        data_model.model.fit (X_train, y_train, 
-                              batch_size = batch_size,
-                              validation_split = validation_split)
+        data_model.model.fit (x = X_train, y = y_train, **parameters_for_model_training)
         
         print ("Completed model training.")
 
