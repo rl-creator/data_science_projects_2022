@@ -12,7 +12,7 @@ def evaluate_model (**parameters_for_model_evaluation):
 
         X_test, y_test = data_model.data_normalised.X_test_norm, data_model.data_normalised.y_test
 
-        results = data_model.model.evalute (x = X_test, y = y_test, **patameter_for_model_evaluation)
+        results = data_model.model.evaluate (x = X_test, y = y_test, **parameters_for_model_evaluation)
 
         print (f"The accuracy of the model is {results[1]}.")
         print (f"The sparce categorical accuracy of the model is {results[2]}.")
