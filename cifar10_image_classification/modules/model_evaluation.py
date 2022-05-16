@@ -2,6 +2,10 @@
 '''Module containing functions for evaluating a 
 neural network model.'''
 
+import numpy as np
+import tensorflow as tf
+from tensorflow import keras
+
 
 ###   Evaluate model
 
@@ -20,6 +24,23 @@ def evaluate_model (**parameters_for_model_evaluation):
 
         return data_model
 
+    return input_model_n_data
+
+
+def return_confusion_matrix (parameters_for_prediction : dict = {}, parameters_for_confusion_matrix : dict = {}):
+    '''Function to set the parameters for model predictions and the parameters 
+    for creating the confusion matrix.'''
+    def input_model_n_data (data_model):
+        '''Function to produce the confusion matrix of the model.'''
+
+        y_labels = data_model.data_normalised.y_test
+
+        y_pred = data_model.model.predict (data_model.data_normalised.X_test_norm, **parameters_for_prediction)
+
+        #confusion_matrix = tf.math.confusion_matrix (y_labels, y_pred, **parameters_for_confusion_matrix)
+
+        return y_pred
+    
     return input_model_n_data
 
 
