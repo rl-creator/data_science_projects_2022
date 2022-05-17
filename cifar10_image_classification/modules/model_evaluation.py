@@ -16,12 +16,12 @@ def evaluate_model (**parameters_for_model_evaluation):
     def input_model_n_data (data_model_history):
         '''Function to evaluate the model'''
 
-        X_test, y_test = data_model.data_normalised.X_test_norm, data_model.data_normalised.y_test
+        X_test, y_test = data_model_history.data_normalised.X_test_norm, data_model_history.data_normalised.y_test
 
-        results = data_model.model.evaluate (x = X_test, y = y_test, **parameters_for_model_evaluation)
+        results = data_model_history.model.evaluate (x = X_test, y = y_test, **parameters_for_model_evaluation)
 
         for ind in range (len (results)):
-            print (f"The {data_model.model.metrics_names[ind]} of the model is {results[ind]}.")
+            print (f"The {data_model_history.model.metrics_names[ind]} of the model is {results[ind]}.")
 
         return data_model_history
 
@@ -34,9 +34,9 @@ def return_confusion_matrix (parameters_for_prediction : dict = {}, parameters_f
     def input_model_n_data (data_model_history):
         '''Function to produce the confusion matrix of the model.'''
 
-        y_labels = data_model.data_normalised.y_test
+        y_labels = data_model_history.data_normalised.y_test
 
-        y_pred = np.argmax (data_model.model.predict (data_model.data_normalised.X_test_norm, **parameters_for_prediction), axis = 1)
+        y_pred = np.argmax (data_model_history.model.predict (data_model_history.data_normalised.X_test_norm, **parameters_for_prediction), axis = 1)
 
         confusion_matrix = tf.math.confusion_matrix (y_labels, y_pred, **parameters_for_confusion_matrix)
 
@@ -49,8 +49,11 @@ def return_confusion_matrix (parameters_for_prediction : dict = {}, parameters_f
 
 def plot_confusion_matrix (matrix):
     '''Function to return graphical confusion matrix'''
+
+    labels_text = ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"]
+
     plt.figure (figsize = (12, 10))
-    sns.heatmap (matrix, annot = True, fmt = "g")
+    sns.heatmap (matrix, annot = True, fmt = "g", xticklabels = labels_text, yticklabels = labels_text)
     plt.xlabel ("Prediction")
     plt.ylabel ("Label")
 
