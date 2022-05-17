@@ -5,6 +5,10 @@ neural network model.'''
 import numpy as np
 import tensorflow as tf
 from tensorflow import keras
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+
 
 
 ###   Evaluate model
@@ -35,13 +39,26 @@ def return_confusion_matrix (parameters_for_prediction : dict = {}, parameters_f
 
         y_labels = data_model.data_normalised.y_test
 
-        y_pred = data_model.model.predict (data_model.data_normalised.X_test_norm, **parameters_for_prediction)
+        y_pred = np.argmax (data_model.model.predict (data_model.data_normalised.X_test_norm, **parameters_for_prediction), axis = 1)
 
-        #confusion_matrix = tf.math.confusion_matrix (y_labels, y_pred, **parameters_for_confusion_matrix)
+        confusion_matrix = tf.math.confusion_matrix (y_labels, y_pred, **parameters_for_confusion_matrix)
 
-        return y_pred
+        plot_confusion_matrix (confusion_matrix)
+
+        return data_model
     
     return input_model_n_data
+
+
+def plot_confusion_matrix (matrix):
+    '''Function to return graphical confusion matrix'''
+    plt.figure (figsize = (12, 10))
+    sns.heatmap (matrix, annot = True, fmt = "g")
+    plt.xlabel ("Prediction")
+    plt.ylabel ("Label")
+
+    plt.show ()
+
 
 
 if __name__ == "__main__":
