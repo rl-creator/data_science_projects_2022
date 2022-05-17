@@ -22,9 +22,8 @@ def evaluate_model (**parameters_for_model_evaluation):
 
         results = data_model.model.evaluate (x = X_test, y = y_test, **parameters_for_model_evaluation)
 
-        print (f"The accuracy of the model is {results[1]}.")
-        print (f"The sparce categorical accuracy of the model is {results[2]}.")
-        #   results[0] is the loss of the model.
+        for ind in range (len (results)):
+            print (f"The {data_model.model.metrics_names[ind]} of the model is {results[ind]}.")
 
         return data_model
 
