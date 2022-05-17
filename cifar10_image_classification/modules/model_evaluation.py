@@ -9,13 +9,11 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 
-
-
 ###   Evaluate model
 
 def evaluate_model (**parameters_for_model_evaluation):
     '''Function to set the parameters for the model evaluation.'''
-    def input_model_n_data (data_model):
+    def input_model_n_data (data_model_history):
         '''Function to evaluate the model'''
 
         X_test, y_test = data_model.data_normalised.X_test_norm, data_model.data_normalised.y_test
@@ -25,7 +23,7 @@ def evaluate_model (**parameters_for_model_evaluation):
         for ind in range (len (results)):
             print (f"The {data_model.model.metrics_names[ind]} of the model is {results[ind]}.")
 
-        return data_model
+        return data_model_history
 
     return input_model_n_data
 
@@ -33,7 +31,7 @@ def evaluate_model (**parameters_for_model_evaluation):
 def return_confusion_matrix (parameters_for_prediction : dict = {}, parameters_for_confusion_matrix : dict = {}):
     '''Function to set the parameters for model predictions and the parameters 
     for creating the confusion matrix.'''
-    def input_model_n_data (data_model):
+    def input_model_n_data (data_model_history):
         '''Function to produce the confusion matrix of the model.'''
 
         y_labels = data_model.data_normalised.y_test
@@ -44,7 +42,7 @@ def return_confusion_matrix (parameters_for_prediction : dict = {}, parameters_f
 
         plot_confusion_matrix (confusion_matrix)
 
-        return data_model
+        return data_model_history
     
     return input_model_n_data
 

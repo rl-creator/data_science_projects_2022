@@ -117,13 +117,14 @@ def train_model (**parameters_for_model_training):
         #   Training data
         X_train, y_train = data_model.data_normalised.X_train_norm, data_model.data_normalised.y_train
 
-        data_model.model.fit (x = X_train, y = y_train, **parameters_for_model_training)
+        history = data_model.model.fit (x = X_train, y = y_train, **parameters_for_model_training)
         
         print ("Completed model training.")
 
-        return data_model
+        return store_data ("data_raw", "data_normalised", "model", "history") (data_model.data_raw, data_model.data_normalised, data_model.model, history)
 
     return input_model_n_data
+
 
 if __name__ == "__main__":
     pass
